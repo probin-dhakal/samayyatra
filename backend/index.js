@@ -13,11 +13,14 @@ const app = express();
 
 const PORT = process.env.PORT || 8002;
 
+const allowedOrigins = ['https://samayyatra-1.onrender.com'];
+
+// Use CORS middleware
 app.use(
   cors({
-    origin: "https://samayyatra-1.onrender.com",
-    methods: ["GET", "PUT", "DELETE", "POST"],
-    credentials: true,
+    origin: allowedOrigins,  // Only allow requests from your frontend domain
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Specify allowed HTTP methods
+    credentials: true,  // Optional, if you need to send cookies with the request
   })
 );
 app.use(express.json());
