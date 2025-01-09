@@ -6,81 +6,46 @@ import bcrypt from "bcryptjs"
 import validator from "validator"
 
 
-// export const signup = async (req, res) => {
-//   try {
-//     const { name, email, password } = req.body;
+export const signup = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
 
-//     if (!name || !email || !password) {
-//       return res.status(400).json({ message: "All fields are required." });
-//     }
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
 
    
-//     if (!validator.isEmail(email)) {
-//       return res.status(400).json({ message: "Please provide a valid email address." });
-//     }
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "Please provide a valid email address." });
+    }
 
 
 
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.status(400).json({ message: "User already exists." });
-//     }
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists." });
+    }
 
 
-//     const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     
-//     const newUser = await User.create({
-//       name,
-//       email,
-//       password: hashedPassword,
-//     });
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
 
 
-//     sendToken(newUser, 201, res, "User registered successfully");
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Something went wrong. Please try again." });
-//   }
-// };
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  if (!name || !email || !password) {
-    toast.error("All fields are required");
-    return;
-  }
-
-  try {
-    setLoading(true);
-    const { data } = await axios.post(
-      "https://samayyatra.onrender.com/api/v1/user/signup",
-      { name, email, password },
-      {
-        withCredentials: true,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    // Save the token to local storage
-    localStorage.setItem("authToken", data.token);
-
-    setName("");
-    setEmail("");
-    setPassword("");
-    toast.success("Account created successfully!");
-    setIsAuthenticated(true);
-    navigateTo("/");
+    sendToken(newUser, 201, res, "User registered successfully");
   } catch (error) {
-    const message = error.response?.data?.message || "An unexpected error occurred. Please try again.";
-    toast.error(message);
-  } finally {
-    setLoading(false);
+    console.error(error);
+    res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
+
+
 
 
 
