@@ -10,7 +10,7 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
   // Set the token as an HTTP-only cookie
   res.cookie("token", token, {
    
-    secure: false, // Set false for local testing
+    secure: true, // Set false for local testing
     maxAge: 3600000, // 1 hour
     sameSite: "Lax", // Adjust for your use case
   });
