@@ -50,7 +50,7 @@ const CreateCapsule = () => {
     try {
       setLoading(true);
       await axios.post(
-        "http://localhost:8002/api/v1/capsule/create",
+        "https://samayyatra.onrender.com/api/v1/capsule/create",
         formData,
         {
           withCredentials: true,
