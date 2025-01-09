@@ -16,7 +16,7 @@ const Login = () => {
 
     try {
       await axios.post(
-        "http://localhost:8002/api/v1/user/login",
+        "https://samayyatra.onrender.com/api/v1/user/login",
         { email, password },
         {
           withCredentials: true,
