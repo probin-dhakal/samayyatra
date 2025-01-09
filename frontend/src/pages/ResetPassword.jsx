@@ -13,7 +13,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8002/api/v1/user/reset-password",
+        "https://samayyatra.onrender.com/api/v1/user/reset-password",
         {
           otp,
           newPassword,
