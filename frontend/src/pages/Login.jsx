@@ -33,9 +33,9 @@ const Login = () => {
     }
   };
 
-  // if (isAuthenticated) {
-  //   return <Navigate to={"/"} />;
-  // }
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <div className="h-screen grid lg:grid-cols-2 bg-slate-900 text-gray-300">
       {/* Left Side - Form */}
