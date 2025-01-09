@@ -11,7 +11,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8002/api/v1/user/forgot-password",
+        "https://samayyatra.onrender.com/api/v1/user/forgot-password",
         { email },
         {
           withCredentials: true,
