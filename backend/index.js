@@ -86,7 +86,7 @@ app.use("/api/v1/capsule", capsuleRouter);
 dbConnection();
 
 // Preflight requests
-app.options("*", cors());
+// app.options("*", cors());
 
 // Start Server
 app.listen(PORT, () => {
