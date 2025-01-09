@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export const sendToken = (user, statusCode, res, message = "Success") => {
  
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "7d",
   });
   // console.log("Generated token:", token);
 
@@ -11,7 +11,7 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
 res.cookie("token", token, {
   httpOnly: true,  // Prevent access by JavaScript
   secure: true,  // Ensure it's secure in production
-  maxAge: 7200000, // 2 hours
+  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 day
   sameSite: "None",  // Required for cross-origin cookies
   path: "/",  // Path to make the cookie available globally
 });
