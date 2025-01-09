@@ -17,39 +17,42 @@ const Signup = () => {
 
   const navigateTo = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!name || !email || !password) {
-      toast.error("All fields are required");
-      return;
-    }
+  if (!name || !email || !password) {
+    toast.error("All fields are required");
+    return;
+  }
 
-    try {
-      setLoading(true);
-   await axios.post(
-        "https://samayyatra.onrender.com/api/v1/user/signup",
-        { name, email, password },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      
-      setName("");
-      setEmail("");
-      setPassword("");
-      toast.success( "Account created successfully!");
-      setIsAuthenticated(true)
-      navigateTo("/");
-    } catch (error) {
-      const message = "An unexpected error occurred. Please try again.";
-      toast.error(message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+    const { data } = await axios.post(
+      "https://samayyatra.onrender.com/api/v1/user/signup",
+      { name, email, password },
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
+    // Save the token to local storage
+    localStorage.setItem("authToken", data.token);
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    toast.success("Account created successfully!");
+    setIsAuthenticated(true);
+    navigateTo("/");
+  } catch (error) {
+    const message = error.response?.data?.message || "An unexpected error occurred. Please try again.";
+    toast.error(message);
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="min-h-screen grid lg:grid-cols-2 bg-slate-900 text-gray-300">
       {/* Left Side */}
