@@ -12,7 +12,7 @@ res.cookie("token", token, {
     httpOnly: true, // Prevent client-side JS from accessing the cookie
     secure: true, // Use true only in production (HTTPS)
     maxAge: 7200000, // 1 hour
-    sameSite: "Lax", // Adjust based on cross-origin use cases
+    sameSite: "None", // Adjust based on cross-origin use cases
 });
 
   
