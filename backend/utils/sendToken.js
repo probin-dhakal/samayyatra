@@ -5,15 +5,16 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
-  console.log("Generated token:", token);
+  // console.log("Generated token:", token);
 
   // Set the token as an HTTP-only cookie
-  res.cookie("token", token, {
-   
-    secure: true, // Set false for local testing
-    maxAge: 3600000, // 1 hour
-    sameSite: "Lax", // Adjust for your use case
-  });
+res.cookie("token", token, {
+    httpOnly: true, // Prevent client-side JS from accessing the cookie
+    secure: true, // Use true only in production (HTTPS)
+    maxAge: 7200000, // 1 hour
+    sameSite: "Lax", // Adjust based on cross-origin use cases
+});
+
   
   // Send response
   res.status(statusCode).json({
