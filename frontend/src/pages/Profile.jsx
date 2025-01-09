@@ -16,7 +16,7 @@ const Profile = () => {
     const fetchCapsules = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:8002/api/v1/capsule/mycapsules",
+          "https://samayyatra.onrender.com/api/v1/capsule/mycapsules",
           {
             withCredentials: true,
           }
@@ -45,7 +45,7 @@ const Profile = () => {
               toast.dismiss(t.id); // Dismiss the toast
               try {
                 const response = await axios.delete(
-                  `http://localhost:8002/api/v1/capsule/delete/${capsuleId}`,
+                  `https://samayyatra.onrender.com/api/v1/capsule/delete/${capsuleId}`,
                   { withCredentials: true }
                 );
                 toast.success("Capsule deleted successfully");
