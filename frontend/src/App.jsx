@@ -42,7 +42,7 @@ const App = () => {
       const fetchUser = async () => {
         try {
           const { data } = await axios.get(
-            `http://localhost:8002/api/v1/user/profile`,
+            `https://samayyatra.onrender.com/api/v1/user/profile`,
             { withCredentials: true }
           );
           setUser(data.user);
@@ -62,7 +62,7 @@ const App = () => {
     const fetchCapsules = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8002/api/v1/capsule/getallcapsules`,
+          `https://samayyatra.onrender.com/api/v1/capsule/getallcapsules`,
           { withCredentials: true }
         );
         
