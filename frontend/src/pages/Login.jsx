@@ -25,8 +25,8 @@ const Login = () => {
         }
       );
 
-      const { token } = response.data; // Assuming the token is returned as part of the response
-      localStorage.setItem("token", token); // Save the token to localStorage
+      const { token } = response.data; // Token from response body
+      localStorage.setItem("authToken", token); // Save token to local storage
 
       setIsAuthenticated(true);
       toast.success("Logged in successfully");
