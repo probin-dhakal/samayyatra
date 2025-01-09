@@ -1,21 +1,22 @@
 import { useState, useContext } from "react";
 import { Eye, EyeOff, Lock, Mail, MessageSquare } from "lucide-react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import axios from "axios"; // Ensure axios is imported
-import toast from "react-hot-toast"; // Ensure toast is imported for feedback
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 import { Context } from "../main.jsx";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigateTo = useNavigate();
-  const { setIsAuthenticated, isAuthenticated } = useContext(Context);
+  const { setIsAuthenticated } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://samayyatra.onrender.com/api/v1/user/login",
         { email, password },
         {
@@ -23,19 +24,21 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
+
+      const { token } = response.data; // Assuming the token is returned as part of the response
+      localStorage.setItem("authToken", token); // Save the token to localStorage
+
       setIsAuthenticated(true);
-      toast.success( "Logged in successfully");
+      toast.success("Logged in successfully");
+
       setEmail("");
       setPassword("");
       navigateTo("/");
     } catch (error) {
-      toast.error( "Error while logging in!!");
+      toast.error("Error while logging in!!");
     }
   };
 
-  // if (isAuthenticated) {
-  //   return <Navigate to={"/"} />;
-  // }
   return (
     <div className="h-screen grid lg:grid-cols-2 bg-slate-900 text-gray-300">
       {/* Left Side - Form */}
