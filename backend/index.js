@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 8002;
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: "https://samayyatra-1.onrender.com",
     methods: ["GET", "PUT", "DELETE", "POST"],
     credentials: true,
   })
