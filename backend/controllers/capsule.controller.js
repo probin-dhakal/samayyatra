@@ -1,8 +1,11 @@
 import Capsule from "../models/capsule.model.js";
+
+import dotenv from "dotenv";
 import schedule from 'node-schedule';
 import mongoose from 'mongoose';
 import { v2 as cloudinary } from 'cloudinary';
 
+dotenv.config();
 // Cloudinary configuration for Images
 const configureCloudinaryImages = () => {
   const config = {
