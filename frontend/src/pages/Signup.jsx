@@ -37,8 +37,8 @@ const handleSubmit = async (e) => {
       }
     );
 
-    // Save the token to local storage
-    localStorage.setItem("authToken", data.token);
+    // // Save the token to local storage
+    // localStorage.setItem("authToken", data.token);
 
     setName("");
     setEmail("");
