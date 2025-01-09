@@ -9,10 +9,11 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
 
   
 res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,    // Ensures the cookie is sent over HTTPS
+  httpOnly: true,  // Prevent access by JavaScript
+  secure: true,  // Ensure it's secure in production
   maxAge: 7200000, // 2 hours
-  sameSite: "None", // For cross-origin requests
+  sameSite: "None",  // Required for cross-origin cookies
+  path: "/",  // Path to make the cookie available globally
 });
 
 
