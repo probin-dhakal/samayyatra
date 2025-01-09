@@ -1,15 +1,7 @@
 import Capsule from "../models/capsule.model.js";
-import User from "../models/user.model.js"
-import dotenv from "dotenv";
 import schedule from 'node-schedule';
 import mongoose from 'mongoose';
-
-import cloudinary from "cloudinary";
-import {
-  sendCapsuleCreatedEmail,
-  sendCapsuleReminderEmail,
-} from "../utils/sendOtpEmail.js";
-dotenv.config();
+import { v2 as cloudinary } from 'cloudinary';
 
 // Cloudinary configuration for Images
 const configureCloudinaryImages = () => {
@@ -19,11 +11,9 @@ const configureCloudinaryImages = () => {
     api_secret: process.env.CLOUDINARY_IMAGES_API_SECRET,
   };
 
-  const cloudinaryInstance = cloudinary.v2; // Use ES module syntax
-  cloudinaryInstance.config(config);
-
+  cloudinary.config(config);
   console.log("Cloudinary configured for Images:", config.cloud_name);
-  return cloudinaryInstance;
+  return cloudinary;
 };
 
 // Cloudinary configuration for Videos
@@ -34,11 +24,9 @@ const configureCloudinaryVideos = () => {
     api_secret: process.env.CLOUDINARY_VIDEOS_API_SECRET,
   };
 
-  const cloudinaryInstance = cloudinary.v2; // Use ES module syntax
-  cloudinaryInstance.config(config);
-
+  cloudinary.config(config);
   console.log("Cloudinary configured for Videos:", config.cloud_name);
-  return cloudinaryInstance;
+  return cloudinary;
 };
 
 // Configure separate Cloudinary instances for Images and Videos
@@ -86,6 +74,7 @@ const uploadFilesToCloudinary = async (
 
   return urls;
 };
+
 
 // API Handler to Create Capsule
 
