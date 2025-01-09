@@ -17,7 +17,7 @@ const Navbar = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:8002/api/v1/user/logout",
+        "https://samayyatra.onrender.com/api/v1/user/logout",
         {},
         { withCredentials: true }
       );
