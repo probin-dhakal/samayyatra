@@ -20,8 +20,8 @@ const Login = () => {
         "https://samayyatra.onrender.com/api/v1/user/login",
         { email, password },
         {
-          withCredentials: true
-          // headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+           headers: { "Content-Type": "application/json" },
         }
       );
 
