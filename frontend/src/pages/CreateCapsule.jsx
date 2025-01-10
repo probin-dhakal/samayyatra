@@ -42,23 +42,32 @@ const handleSubmit = async (e) => {
   formData.append("message", message);
   formData.append("isPrivate", isPrivate); // Changed to isPrivate
   formData.append("unlockTime", time);
-  image.forEach((img) => formData.append("image", img));
-  video.forEach((vid) => formData.append("video", vid));
 
-  // Log FormData contents
+  // Log before appending files to ensure they exist
+  console.log('Image Files:', image);
+  console.log('Video Files:', video);
+
+  // Append image files if they exist
+  if (image.length > 0) {
+    image.forEach((img) => formData.append("image", img));
+  }
+
+  // Append video files if they exist
+  if (video.length > 0) {
+    video.forEach((vid) => formData.append("video", vid));
+  }
+
+  // Log FormData content after appending
   for (let pair of formData.entries()) {
     console.log(pair[0] + ": " + pair[1]);
   }
 
-  // Retrieve token from localStorage
   const token = localStorage.getItem("authToken");
 
   if (!token) {
     toast.error("Authorization token not found. Please log in again.");
     return;
   }
-
-  console.log([formData]);
 
   try {
     setLoading(true);
@@ -69,7 +78,7 @@ const handleSubmit = async (e) => {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,  // Use the token from localStorage
+          Authorization: `Bearer ${token}`,
         },
       }
     );
