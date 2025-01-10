@@ -32,50 +32,93 @@ const App = () => {
     setCapsules,
   } = useContext(Context);
 
-  useEffect(() => {
-    const token = Cookies.get("token") || localStorage.getItem("token");
+//   useEffect(() => {
+//     const fetchUser = async () => {
+//   try {
+//     const authToken = Cookies.get("token") || localStorage.getItem("token"); // Ensure you retrieve the token
+//     const { data } = await axios.get(
+//       `https://samayyatra.onrender.com/api/v1/user/profile`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${authToken}`,
+//         },
+//         withCredentials: true,
+//       }
+//     );
+//     setUser(data.user);
+//   } catch (error) {
+//     console.error("Failed to fetch user", error);
+//     setIsAuthenticated(false);
+//     setUser({});
+//   }
+// };
 
-    // console.log(token);
-    if (token) {
-      setIsAuthenticated(true);
 
-      const fetchUser = async () => {
-        try {
-          const { data } = await axios.get(
-            `https://samayyatra.onrender.com/api/v1/user/profile`,
-            { withCredentials: true }
-          );
-          setUser(data.user);
-        } catch (error) {
-          console.error("Failed to fetch user", error);
-          setIsAuthenticated(false);
-          setUser({});
-        }
-      };
+//     const fetchCapsules = async () => {
+//       try {
+//         const { data } = await axios.get(
+//           `https://samayyatra.onrender.com/api/v1/capsule/getallcapsules`,
+//           { withCredentials: true }
+//         );
+        
+//         setCapsules(data.allCapsule);
+//       } catch (error) {
+//         console.error("Failed to fetch capsules", error);
+//         setCapsules([]);
+//       }
+//     };
 
-      fetchUser();
-    } else {
-      setIsAuthenticated(false);
-      setUser({});
-    }
+//     fetchCapsules();
+//   }, []); // Empty dependency array to run once after mount
 
-    const fetchCapsules = async () => {
+useEffect(() => {
+  const token = Cookies.get("token"); // Use Cookies consistently
+
+  if (token) {
+    setIsAuthenticated(true);
+
+    const fetchUser = async () => {
       try {
         const { data } = await axios.get(
-          `https://samayyatra.onrender.com/api/v1/capsule/getallcapsules`,
-          { withCredentials: true }
+          `https://samayyatra.onrender.com/api/v1/user/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
         );
-        
-        setCapsules(data.allCapsule);
+        setUser(data.user);
       } catch (error) {
-        console.error("Failed to fetch capsules", error);
-        setCapsules([]);
+        console.error("Failed to fetch user", error);
+        setIsAuthenticated(false);
+        setUser({});
       }
     };
 
-    fetchCapsules();
-  }, []); // Empty dependency array to run once after mount
+    fetchUser();
+  } else {
+    setIsAuthenticated(false);
+    setUser({});
+  }
 
+  const fetchCapsules = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://samayyatra.onrender.com/api/v1/capsule/getallcapsules`,
+        { withCredentials: true }
+      );
+      setCapsules(data.allCapsule);
+    } catch (error) {
+      console.error("Failed to fetch capsules", error);
+      setCapsules([]);
+    }
+  };
+
+  fetchCapsules();
+}, []); // Empty dependency array to run once after mount
+
+  
 //  console.log(capsules)
   return (
     <div>
