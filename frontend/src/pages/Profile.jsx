@@ -17,8 +17,10 @@ const Profile = () => {
       try {
         const { data } = await axios.get(
           "https://samayyatra.onrender.com/api/v1/capsule/mycapsules",
-          {
-            withCredentials: true,
+         {
+            headers: {
+              Authorization: `Bearer ${token}`, // Use token in Authorization header
+            },
           }
         );
 
