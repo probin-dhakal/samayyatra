@@ -10,14 +10,19 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-
-
   useEffect(() => {
     const fetchCapsules = async () => {
+      const token = localStorage.getItem("authToken"); // Retrieve token from localStorage
+      if (!token) {
+        setError("No authorization token found. Please log in.");
+        setLoading(false);
+        return;
+      }
+
       try {
         const { data } = await axios.get(
           "https://samayyatra.onrender.com/api/v1/capsule/mycapsules",
-         {
+          {
             headers: {
               Authorization: `Bearer ${token}`, // Use token in Authorization header
             },
@@ -70,8 +75,6 @@ const Profile = () => {
       </div>
     ));
   };
-
-  
 
   return (
     <div className="relative min-h-screen">
