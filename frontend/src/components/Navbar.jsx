@@ -14,23 +14,30 @@ const Navbar = () => {
   };
 
   const handleLogout = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(
-        "https://samayyatra.onrender.com/api/v1/user/logout",
-        {},
-        { withCredentials: true }
-      );
+  e.preventDefault();
+  try {
+    // Send logout request to the server
+    await axios.post(
+      "https://samayyatra.onrender.com/api/v1/user/logout",
+      {},
+      { withCredentials: true }
+    );
 
-      setIsAuthenticated(false);
-      setUser({});
+    // Clear authentication state and local storage
+    setIsAuthenticated(false);
+    setUser({});
+    localStorage.removeItem("authToken"); // Clear the token from localStorage
 
-      toast.success("Logged out successfully");
-      navigateTo("/");
-    } catch (error) {
-      toast.success("logged out successfully");
-    }
-  };
+    toast.success("Logged out successfully");
+    navigateTo("/");
+  } catch (error) {
+    // Clear localStorage even if the request fails
+    localStorage.removeItem("authToken");
+
+    toast.success("Logged out successfully");
+  }
+};
+
 
   return (
     <>
