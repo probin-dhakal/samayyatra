@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: backend-service
+    name: samayyatra
     env: node
     buildCommand: npm install
     startCommand: npm start
@@ -8,7 +8,7 @@ services:
       path: /*
       destination: /index.html  # Redirects frontend routes to index.html
   - type: web
-    name: frontend-service
+    name: samayyatra-1
     env: static
     buildCommand: npm run build
     startCommand: serve -s build
