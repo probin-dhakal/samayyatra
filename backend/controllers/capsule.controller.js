@@ -1,5 +1,5 @@
 import Capsule from "../models/capsule.model.js";
-
+import {sendCapsuleCreatedEmail,sendCapsuleReminderEmail} from "../utils/sendOtpEmail.js"
 import dotenv from "dotenv";
 import schedule from 'node-schedule';
 import mongoose from 'mongoose';
