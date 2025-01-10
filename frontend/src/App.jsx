@@ -72,7 +72,7 @@ const App = () => {
 //   }, []); // Empty dependency array to run once after mount
 
 useEffect(() => {
-  const token = Cookies.get("token"); // Use Cookies consistently
+  const token = localStorage.getItem("authToken"); // Fetch token from localStorage
 
   if (token) {
     setIsAuthenticated(true);
@@ -83,16 +83,15 @@ useEffect(() => {
           `https://samayyatra.onrender.com/api/v1/user/profile`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`, // Use token in Authorization header
             },
-            withCredentials: true,
           }
         );
-        setUser(data.user);
+        setUser(data.user); // Set user data from API response
       } catch (error) {
         console.error("Failed to fetch user", error);
         setIsAuthenticated(false);
-        setUser({});
+        setUser({}); // Reset user on error
       }
     };
 
@@ -106,17 +105,22 @@ useEffect(() => {
     try {
       const { data } = await axios.get(
         `https://samayyatra.onrender.com/api/v1/capsule/getallcapsules`,
-        { withCredentials: true }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Use token for fetching capsules
+          },
+        }
       );
-      setCapsules(data.allCapsule);
+      setCapsules(data.allCapsule); // Set capsules data
     } catch (error) {
       console.error("Failed to fetch capsules", error);
-      setCapsules([]);
+      setCapsules([]); // Reset capsules on error
     }
   };
 
   fetchCapsules();
-}, []); // Empty dependency array to run once after mount
+}, []); // Empty dependency array to ensure it runs only on mount
+ // Empty dependency array to run once after mount
 
   
 //  console.log(capsules)
