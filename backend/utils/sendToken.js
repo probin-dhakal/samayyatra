@@ -17,17 +17,18 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
 // });
 
 res.cookie("token", token, {
-  // httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // Enable only in production
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
   sameSite: "None",
   maxAge: 7 * 24 * 60 * 60 * 1000,
- path: "/",
+  path: "/",
 });
+
 
   
   // Send response
   res.status(statusCode).json({
     message, // Success message
-    token, // Optional for debugging, remove in production
+   
   });
 };
