@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: backend-service
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    route:
+      path: /*
+      destination: /index.html  # Redirects frontend routes to index.html
+  - type: web
+    name: frontend-service
+    env: static
+    buildCommand: npm run build
+    startCommand: serve -s build
