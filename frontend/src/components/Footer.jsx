@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-slate-600 text-white py-6">
@@ -7,20 +7,32 @@ const Footer = () => {
         <div>
           <h3 className="font-bold mb-2">Quick Links</h3>
           <ul className="space-y-1">
-            <li>Home</li>
-            <li>How It Works</li>
-            <li>Create a Capsule</li>
-            <li>Explore Public Capsules</li>
-            <li>FAQ</li>
-            
+            <li>
+              {" "}
+              <Link to={"/"}>Home</Link>{" "}
+            </li>
+            <li>
+              <Link to={"/"}>How It Works</Link>
+            </li>
+            <li>
+              <Link to={"/create"}>Create a Capsule</Link>{" "}
+            </li>
+            <li>
+              {" "}
+              <Link to={"/capsules"}>Explore Public Capsules</Link>
+            </li>
+            <li>
+              {" "}
+              <Link to={"/faq"}>FAQ</Link>
+            </li>
           </ul>
         </div>
         <div>
           <h3 className="font-bold mb-2">Legal & Privacy</h3>
           <ul className="space-y-1">
-            <li>Terms of Service</li>
-            <li>Privacy Policy</li>
-            <li>Cookie Policy</li>
+            <li> <Link to={"/terms"}>Terms of Service</Link> </li>
+            <li> <Link to={"/privacy"}>Privacy Policy</Link></li>
+            <li> <Link to={"/cookie"}>Cookie Policy</Link></li>
           </ul>
         </div>
         <div>
@@ -28,13 +40,15 @@ const Footer = () => {
           <ul className="space-y-1">
             <li>Contact Us</li>
             <li>Help Center</li>
-            <li>Email Support: support@yourwebsite.com</li>
+            <li>Email Support: help@Samayyatra.com</li>
             <li>Phone Number: +1 (123) 456-7890</li>
           </ul>
         </div>
         <div>
           <h3 className="font-bold mb-2">Newsletter Signup</h3>
-          <p className="mb-2">Subscribe for the latest updates and capsule inspiration!</p>
+          <p className="mb-2">
+            Subscribe for the latest updates and capsule inspiration!
+          </p>
           <input
             type="email"
             placeholder="Enter your email"
