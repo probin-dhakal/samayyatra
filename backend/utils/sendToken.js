@@ -29,6 +29,6 @@ res.cookie("token", token, {
   // Send response
   res.status(statusCode).json({
     message, // Success message
-   
+    token,
   });
 };
