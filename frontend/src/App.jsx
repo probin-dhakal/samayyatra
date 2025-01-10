@@ -21,7 +21,7 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Cookies from "js-cookie";
 import CreateCapsule from "./pages/CreateCapsule.jsx";
 import OpenedCapsule from "./pages/OpenedCapsule.jsx";
-import { useLocation } from 'react-router-dom';
+
 const App = () => {
   const {
     setUser,
@@ -70,11 +70,7 @@ const App = () => {
 
 //     fetchCapsules();
 //   }, []); // Empty dependency array to run once after mount
- const location = useLocation();
-    useEffect(() => {
-        // This will run whenever the route changes, including after reload
-        console.log(`Current route is ${location.pathname}`);
-    }, [location]);
+ 
 useEffect(() => {
   const token = localStorage.getItem("authToken"); // Fetch token from localStorage
 
