@@ -45,6 +45,11 @@ const handleSubmit = async (e) => {
   image.forEach((img) => formData.append("image", img));
   video.forEach((vid) => formData.append("video", vid));
 
+  // Log FormData contents
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ": " + pair[1]);
+  }
+
   // Retrieve token from localStorage
   const token = localStorage.getItem("authToken");
 
