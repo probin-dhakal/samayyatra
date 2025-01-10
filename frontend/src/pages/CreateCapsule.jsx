@@ -18,59 +18,71 @@ const CreateCapsule = () => {
   const handleFileUpload = (e, setState) => {
     setState((prev) => [...prev, ...e.target.files]);
   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  if (!isAuthenticated) {
+    toast.error("Please Login to create your capsule");
+    return;
+  }
 
-    if (!isAuthenticated) {
-      toast.error("Please Login to create your capsule");
-      return;
-    }
+  if (!title || !memory || !message) {
+    toast.error("Please fill out all fields.");
+    return;
+  }
 
-    if (!title || !memory || !message) {
-      toast.error("Please fill out all fields.");
-      return;
-    }
+  if (new Date(time) < new Date()) {
+    toast.error("Unlock date cannot be in the past");
+    return;
+  }
 
-    if (new Date(time) < new Date()) {
-      toast.error("Unlock date cannot be in the past");
-      return;
-    }
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("memory", memory);
+  formData.append("message", message);
+  formData.append("isPrivate", isPrivate); // Changed to isPrivate
+  formData.append("unlockTime", time);
+  image.forEach((img) => formData.append("image", img));
+  video.forEach((vid) => formData.append("video", vid));
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("memory", memory);
-    formData.append("message", message);
-    formData.append("isPrivate", isPrivate); // Changed to isPrivate
-    formData.append("unlockTime", time);
-    image.forEach((img) => formData.append("image", img));
-    video.forEach((vid) => formData.append("video", vid));
+  // Retrieve token from localStorage
+  const token = localStorage.getItem("authToken");
 
-    console.log([formData]);
-    try {
-      setLoading(true);
-      await axios.post(
-        "https://samayyatra.onrender.com/api/v1/capsule/create",
-        formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      toast.success("Congratulations! Your Capsule is created successfully.");
-      setTitle("");
-      setMemory("");
-      setMessage("");
-      setIsPrivate(false); // Reset to false
-      setImage([]);
-      setVideo([]);
-      setTime("");
-    } catch (error) {
-      toast.error("Capsule creation failed.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (!token) {
+    toast.error("Authorization token not found. Please log in again.");
+    return;
+  }
+
+  console.log([formData]);
+
+  try {
+    setLoading(true);
+    await axios.post(
+      "https://samayyatra.onrender.com/api/v1/capsule/create",
+      formData,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,  // Use the token from localStorage
+        },
+      }
+    );
+    toast.success("Congratulations! Your Capsule is created successfully.");
+    setTitle("");
+    setMemory("");
+    setMessage("");
+    setIsPrivate(false); // Reset to false
+    setImage([]);
+    setVideo([]);
+    setTime("");
+  } catch (error) {
+    toast.error("Capsule creation failed.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const previewImages = image.map((img, index) => (
     <img
