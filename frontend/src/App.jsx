@@ -21,7 +21,7 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Cookies from "js-cookie";
 import CreateCapsule from "./pages/CreateCapsule.jsx";
 import OpenedCapsule from "./pages/OpenedCapsule.jsx";
-import { useNavigate } from 'react-router-dom';
+
 const App = () => {
   const {
     setUser,
@@ -53,13 +53,13 @@ const App = () => {
 //   }
 // };
 
-     const navigate = useNavigate();
+    //  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (window.location.pathname !== '/') {
-            navigate('/');
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     if (window.location.pathname !== '/') {
+    //         navigate('/');
+    //     }
+    // }, [navigate]);
 
 //     const fetchCapsules = async () => {
 //       try {
