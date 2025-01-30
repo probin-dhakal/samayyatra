@@ -19,7 +19,7 @@ const OpenedCapsule = () => {
         console.log(response.data);
       } catch (err) {
         setError("Server error while fetching capsule data.");
-        console.error("Error fetching capsule:", err);
+        console.error("Error fetching capsule: 11", err);
       } finally {
         setLoading(false);
       }
