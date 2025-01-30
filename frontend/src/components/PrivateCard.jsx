@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const PrivateCard = ({ title, user, createdAt, unlockTime, handleDelete }) => {
+const PrivateCard = ({ title, user, createdAt, unlockTime, handleDelete,id }) => {
   const [timeLeft, setTimeLeft] = useState({});
   const [isUnlocked, setIsUnlocked] = useState(false);
 
@@ -84,7 +84,7 @@ const PrivateCard = ({ title, user, createdAt, unlockTime, handleDelete }) => {
           <div className="mt-4 text-gray-200 text-lg font-semibold">
             {isUnlocked ? (
               <Link
-                to="/opened-capsule"
+                to={`/opened-capsule/${id}`}
                 className="text-green-400 font-bold hover:underline cursor-pointer"
               >
                 Click to Open Your Capsule
