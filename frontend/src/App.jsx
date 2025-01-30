@@ -149,7 +149,7 @@ useEffect(() => {
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/opened-capsule" element={<OpenedCapsule />} />
+          <Route path="/opened-capsule/:id" element={<OpenedCapsule />} />
         </Routes>
         <Footer />
         <Toaster />
