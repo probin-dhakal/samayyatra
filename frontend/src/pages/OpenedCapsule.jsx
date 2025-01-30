@@ -13,7 +13,7 @@ const OpenedCapsule = () => {
     const fetchCapsuleData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8002/api/v1/capsule/mycapsule/${id}`
+          `"https://samayyatra.onrender.com/api/v1/capsule/mycapsule/${id}`
         );
         setCapsuleData(response.data); // Update the state with fetched data
         console.log(response.data);
