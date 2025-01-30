@@ -32,7 +32,7 @@ const Home = () => {
       <div className="flex gap-4 mb-3 flex-wrap justify-center items-center">
         {capsules && capsules.length > 0 ? (
           capsules.map((capsule) => (
-            <SpaceCard key={capsule._id} {...capsule} />
+          <SpaceCard key={capsule._id} {...capsule} cardId={capsule._id} />
           ))
         ) : (
           <p className="text-white text-lg">No capsules found.</p>
