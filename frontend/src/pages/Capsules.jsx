@@ -22,7 +22,7 @@ const Capsules = ({ capsules }) => {
         {/* Image and Text Section */}
         <div className="flex flex-wrap items-center justify-center gap-10 mb-8">
           {capsules.map((capsule, index) => (
-            <SpaceCard key={index} {...capsule} />
+            <SpaceCard key={index} {...capsule} cardId={capsule._id}/>
           ))}
         </div>
       </div>
