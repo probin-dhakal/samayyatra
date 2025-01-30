@@ -126,6 +126,7 @@ const Profile = () => {
                     createdAt={capsule.createdAt}
                     unlockTime={capsule.unlockTime}
                     handleDelete={() => handleDelete(capsule._id)}
+                    id = {capsule._id}
                   />
                 </div>
               ))
