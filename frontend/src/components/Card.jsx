@@ -3,7 +3,7 @@ import axios from "axios"; // Import axios
 import { FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const SpaceCard = ({ title, ownerId, createdAt, unlockTime }) => {
+const SpaceCard = ({ title, ownerId, createdAt, unlockTime,cardId }) => {
   const [timeLeft, setTimeLeft] = useState({});
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [ownerName, setOwnerName] = useState(""); // State to store owner name
@@ -105,7 +105,7 @@ const SpaceCard = ({ title, ownerId, createdAt, unlockTime }) => {
           <div className="mt-4 text-gray-200 text-lg font-semibold">
             {isUnlocked ? (
               <Link
-                to="/opened-capsule"
+                 to={`/opened-capsule/${cardId}`}
                 className="text-green-400 font-bold hover:underline cursor-pointer"
               >
                 Click to Open Your Capsule
